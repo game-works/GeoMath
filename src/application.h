@@ -19,7 +19,7 @@ private:
 public:
 	const char* window_title;
 	int width, height;
-	bool isRunning = false;
+	static bool isRunning;
 
 //METHODS
 public:

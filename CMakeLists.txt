@@ -21,6 +21,8 @@ add_executable(${OUTPUT_NAME}
     # List of source files
     src/main.cpp
     src/application.cpp
+    src/menu.cpp
+    src/popup.cpp
     ${LIB_IMGUI}/imgui.cpp
     ${LIB_IMGUI}/imgui_draw.cpp
     ${LIB_IMGUI}/imgui_widgets.cpp

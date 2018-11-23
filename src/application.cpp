@@ -1,6 +1,8 @@
 #include "application.h"
 #include <iostream>
 
+bool App::isRunning = false;
+
 App::App(const char* title, int w, int h)
 {
 	window_title = title;
