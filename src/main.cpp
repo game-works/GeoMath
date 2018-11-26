@@ -26,8 +26,8 @@ int main()
 		app->Render();
 	}
 
-	delete app;
+	delete data;
 	delete graph;
 	delete menu;
-	delete data;
+	delete app;
 }

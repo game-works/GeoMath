@@ -1,9 +1,12 @@
 #include <iostream>
+#include "imgui.h"
+#include "application.h"
 #include "menu.h"
 #include "popup.h"
-#include "application.h"
-#include "imgui.h"
+#include "graph.h"
+#include "data.h"
 
+bool Menu::isShowing = true;
 bool Menu::show_exit_confirmation = false;
 bool Menu::show_about_us = false;
 bool Menu::show_about_software = false;
@@ -43,6 +46,8 @@ Menu::~Menu()
 
 void Menu::Update()
 {
+	if (!isShowing)
+		return;
 	exit_confirmation->Update(show_exit_confirmation);
 	about_us->Update(show_about_us);
 	about_software->Update(show_about_software);
@@ -54,6 +59,12 @@ void Menu::Update()
 		if (ImGui::BeginMenu("File"))
 		{
 			if (ImGui::MenuItem("Exit")) show_exit_confirmation = true;
+			ImGui::EndMenu();
+		}
+		if (ImGui::BeginMenu("View"))
+		{
+			ImGui::Checkbox("Graph", &Graph::isShowing);
+			ImGui::Checkbox("Data", &Data::isShowing);
 			ImGui::EndMenu();
 		}
 		if (ImGui::BeginMenu("About"))

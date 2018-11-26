@@ -9,6 +9,7 @@ private:
 	Popup* about_software;
 
 public:
+	static bool isShowing;
 	static bool show_exit_confirmation;
 	static bool show_about_us;
 	static bool show_about_software;

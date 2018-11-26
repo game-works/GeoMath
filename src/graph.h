@@ -11,6 +11,9 @@ private:
 	double graph_height;
 
 public:
+	static bool isShowing;
+
+public:
 	Graph();
 	~Graph();
 	void Update();

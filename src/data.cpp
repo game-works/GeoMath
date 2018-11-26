@@ -3,17 +3,15 @@
 #include "data.h"
 #include "application.h"
 
+bool Data::isShowing = true;
 std::vector<Vector2*> Data::points;
 
 Data::Data()
 {
 	title = "Data";
-	flags = ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoCollapse;
+	flags = ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize;
 	main_width = App::width * 0.3;
 	main_height = App::height * 0.8;
-
-	points.push_back(new Vector2());
-	points.push_back(new Vector2());
 }
 
 Data::~Data()
@@ -23,6 +21,8 @@ Data::~Data()
 
 void Data::Update()
 {
+	if (!isShowing)
+		return;
 	ImGui::SetNextWindowSize(ImVec2(main_width, main_height));
 	ImGui::Begin(title, NULL, flags);
 	int i = 0;

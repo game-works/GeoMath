@@ -12,6 +12,7 @@ private:
 	double main_height;
 
 public:
+	static bool isShowing;
 	static std::vector<Vector2*> points;
 
 public:

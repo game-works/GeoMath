@@ -3,9 +3,11 @@
 #include "graph.h"
 #include "application.h"
 
+bool Graph::isShowing = true;
+
 Graph::Graph()
 {
-	flags = ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoCollapse;
+	flags = ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize;
 	main_width = App::width * 0.5;
 	main_height = App::height * 0.8;
 	graph_width = main_width * 0.95;
@@ -19,6 +21,8 @@ Graph::~Graph()
 
 void Graph::Update()
 {
+	if (!isShowing)
+		return;
 	ImGui::SetNextWindowSize(ImVec2(main_width, main_height));
 	ImGui::Begin("Graph", NULL, flags);
   // static float values[90] = { 0 };
