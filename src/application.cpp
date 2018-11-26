@@ -5,6 +5,7 @@ bool App::isRunning = false;
 const char* App::window_title;
 int App::width;
 int App::height;
+const char* App::version = "0.0.0";
 
 App::App(const char* title, int w, int h)
 {

@@ -29,7 +29,7 @@ void Popup::Update(bool &open)
 
 		if (btn_1)
 		{
-			if (ImGui::Button(btn1_text, ImVec2(120, 0)))
+			if (ImGui::Button(btn1_text, ImVec2(ImGui::GetWindowContentRegionWidth(), 0)))
 			{
 				ImGui::CloseCurrentPopup();
 				clicked = 1;
@@ -39,8 +39,7 @@ void Popup::Update(bool &open)
 		if (btn_2)
 		{
 			ImGui::SetItemDefaultFocus();
-			ImGui::SameLine();
-			if (ImGui::Button(btn2_text, ImVec2(120, 0)))
+			if (ImGui::Button(btn2_text, ImVec2(ImGui::GetWindowContentRegionWidth(), 0)))
 			{
 				ImGui::CloseCurrentPopup();
 				clicked = 0;

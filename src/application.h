@@ -17,6 +17,7 @@ private:
 
 public:
 	static const char* window_title;
+	static const char* version;
 	static int width;
 	static int height;
 	static bool isRunning;

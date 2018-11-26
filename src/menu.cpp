@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <iostream>
 #include "imgui.h"
 #include "application.h"
@@ -31,9 +32,10 @@ Menu::Menu()
 			"Ricardo Palconit Jr.\n");
 	about_us->SetButton1("Close");
 
-	about_software = new Popup("About Software",
-			"Written in C++\n"
-			"Using DearImGui library\n");
+	static char buf[128];
+	sprintf(buf, "Written in C++\nUsing ImGui\nVersion: %s", App::version);
+
+	about_software = new Popup("About Software", buf);
 	about_software->SetButton1("Close");
 }
 

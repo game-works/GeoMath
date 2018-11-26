@@ -10,6 +10,7 @@
 int main()
 {
 	App* app = new App("Math Project", 1280, 800);
+	App::version = "0.0.1";
 	App::isRunning = true;
 	Menu* menu = new Menu();
 	Graph* graph = new Graph();
