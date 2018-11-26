@@ -22,7 +22,7 @@ void Popup::Update(bool &open)
 	if (ImGui::BeginPopupModal(ID, NULL, ImGuiWindowFlags_AlwaysAutoResize))
 	{
 		ImGui::NewLine();
-		ImGui::Text(text);
+		ImGui::Text(text, "%s");
 		ImGui::NewLine();
 		ImGui::Separator();
 		ImGui::NewLine();

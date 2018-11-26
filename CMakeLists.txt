@@ -8,6 +8,7 @@ project(MathProject)
 set(LIB_IMGUI "includes/imgui")
 set(LIB_IMGUI_SFML "includes/imgui-sfml")
 set(OUTPUT_NAME "app")
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # Find OpenGL
 # See https://cmake.org/cmake/help/v3.0/module/FindOpenGL.html for more info
@@ -23,6 +24,8 @@ add_executable(${OUTPUT_NAME}
     src/application.cpp
     src/menu.cpp
     src/popup.cpp
+    src/graph.cpp
+    src/data.cpp
     ${LIB_IMGUI}/imgui.cpp
     ${LIB_IMGUI}/imgui_draw.cpp
     ${LIB_IMGUI}/imgui_widgets.cpp

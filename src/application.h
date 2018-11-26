@@ -1,5 +1,4 @@
 #pragma once
-
 #include <vector>
 #include "imgui.h"
 #include "imgui-SFML.h"
@@ -17,8 +16,9 @@ private:
 	sf::Color bgColor;
 
 public:
-	const char* window_title;
-	int width, height;
+	static const char* window_title;
+	static int width;
+	static int height;
 	static bool isRunning;
 
 //METHODS
@@ -29,5 +29,4 @@ public:
 	void Update();
 	void Render();
 	void Close();
-	const char* getWindowTitle();
 };

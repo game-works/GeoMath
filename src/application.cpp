@@ -1,7 +1,10 @@
-#include "application.h"
 #include <iostream>
+#include "application.h"
 
 bool App::isRunning = false;
+const char* App::window_title;
+int App::width;
+int App::height;
 
 App::App(const char* title, int w, int h)
 {
@@ -51,9 +54,4 @@ void App::Render()
 void App::Close()
 {
 	isRunning = false;
-}
-
-const char* App::getWindowTitle()
-{
-	return window_title;
 }
