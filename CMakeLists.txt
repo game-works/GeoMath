@@ -26,6 +26,7 @@ add_executable(${OUTPUT_NAME}
     src/popup.cpp
     src/graph.cpp
     src/data.cpp
+    src/button.cpp
     ${LIB_IMGUI}/imgui.cpp
     ${LIB_IMGUI}/imgui_draw.cpp
     ${LIB_IMGUI}/imgui_widgets.cpp

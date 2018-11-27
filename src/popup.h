@@ -1,22 +1,20 @@
 #pragma once
+#include <vector>
+#include "button.h"
 
 class Popup
 {
 private:
 	const char* ID;
 	const char* text;
-	const char* btn1_text;
-	const char* btn2_text;
-	bool btn_1 = false;
-	bool btn_2 = false;
+	std::vector<Button*> buttons;
 
 public:
-	int clicked = -1;
+	static bool isShowing;
 
 public:
 	Popup(const char* str, const char* text);
 	~Popup();
-	void Update(bool &open);
-	void SetButton1(const char* text);
-	void SetButton2(const char* text);
+	void Update();
+	void AddButton(Button* button);
 };

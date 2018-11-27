@@ -4,6 +4,7 @@
 #include "application.h"
 #include "menu.h"
 #include "popup.h"
+#include "button.h"
 #include "graph.h"
 #include "data.h"
 
@@ -12,16 +13,17 @@ bool Menu::show_exit_confirmation = false;
 bool Menu::show_about_us = false;
 bool Menu::show_about_software = false;
 
-void print()
-{
-	std::cout << "1" << std::endl;
-}
-
 Menu::Menu()
 {
 	exit_confirmation = new Popup("Exit Confirmation", "Are you sure you want to quit?");
-	exit_confirmation->SetButton1("Okay");
-	exit_confirmation->SetButton2("Cancel");
+	exit_confirmation->AddButton(new Button("Okay", [](void)
+		{
+			App::isRunning = false;
+		}));
+	exit_confirmation->AddButton(new Button("Cancel", [](void)
+		{
+			show_exit_confirmation = false;
+		}));
 
 	about_us = new Popup("About Us",
 			"Made By:\n"
@@ -30,13 +32,19 @@ Menu::Menu()
 			"Edwarc C. Concepcion\n"
 			"Aeron Rae E. Villanueva\n"
 			"Ricardo Palconit Jr.\n");
-	about_us->SetButton1("Close");
+	about_us->AddButton(new Button("Close", [](void)
+		{
+			show_about_us = false;
+		}));
 
 	static char buf[128];
 	sprintf(buf, "Written in C++\nUsing ImGui\nVersion: %s", App::version);
 
 	about_software = new Popup("About Software", buf);
-	about_software->SetButton1("Close");
+	about_software->AddButton(new Button("Close", [](void)
+		{
+			show_about_software = false;
+		}));
 }
 
 Menu::~Menu()
@@ -50,12 +58,11 @@ void Menu::Update()
 {
 	if (!isShowing)
 		return;
-	exit_confirmation->Update(show_exit_confirmation);
-	about_us->Update(show_about_us);
-	about_software->Update(show_about_software);
-	HandleExitConfirmation();
-	HandleAboutConfirmation(show_about_us, about_us->clicked);
-	HandleAboutConfirmation(show_about_software, about_software->clicked);
+
+	if (show_exit_confirmation) exit_confirmation->Update();
+	if (show_about_us) about_us->Update();
+	if (show_about_software) about_software->Update();
+
 	if (ImGui::BeginMainMenuBar())
 	{
 		if (ImGui::BeginMenu("File"))
@@ -76,28 +83,5 @@ void Menu::Update()
 			ImGui::EndMenu();
 		}
 		ImGui::EndMainMenuBar();
-	}
-}
-
-void Menu::HandleExitConfirmation()
-{
-	switch (exit_confirmation->clicked)
-	{
-		case(0):
-			show_exit_confirmation = false;
-			break;
-		case(1):
-			App::isRunning = false;
-			break;
-	}
-}
-
-void Menu::HandleAboutConfirmation(bool &target, int &choice)
-{
-	switch (choice)
-	{
-		case(1):
-			target = false;
-			break;
 	}
 }

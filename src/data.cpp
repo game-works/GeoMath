@@ -25,6 +25,7 @@ void Data::Update()
 		return;
 	ImGui::SetNextWindowSize(ImVec2(main_width, main_height));
 	ImGui::Begin(title, NULL, flags);
+	ImGui::PushItemWidth(ImGui::GetWindowContentRegionWidth());
 	int i = 0;
 	for (Vector2* point : points)
 	{
@@ -48,5 +49,6 @@ void Data::Update()
 
 	if (ImGui::Button("New Point"))
 		points.push_back(new Vector2());
+	ImGui::PopItemWidth();
 	ImGui::End();
 }
