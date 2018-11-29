@@ -23,6 +23,8 @@ void Data::Update()
 {
 	if (!isShowing)
 		return;
+
+	ImGui::SetNextWindowPos(ImVec2(main_width/2, 0), ImGuiCond_FirstUseEver);
 	ImGui::SetNextWindowSize(ImVec2(main_width, main_height));
 	ImGui::Begin(title, NULL, flags);
 	ImGui::PushItemWidth(ImGui::GetWindowContentRegionWidth());

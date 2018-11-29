@@ -1,7 +1,7 @@
 #include <iostream>
-#include "imgui.h"
 #include "graph.h"
 #include "application.h"
+#include "data.h"
 
 bool Graph::isShowing = true;
 
@@ -23,12 +23,19 @@ void Graph::Update()
 {
 	if (!isShowing)
 		return;
+
 	ImGui::SetNextWindowSize(ImVec2(main_width, main_height));
 	ImGui::Begin("Graph", NULL, flags);
-  // static float values[90] = { 0 };
-	// void ImGui::PlotLines(const char* label, const float* values, int values_count, int values_offset, const char* overlay_text, float scale_min, float scale_max, ImVec2 graph_size, int stride)
-	// static float value[8] = {0,0.1,0.2,0.3,0.4,0.5,0.6,0.7};
-	// ImGui::PlotLines("", value, 8, 0, "", 1, 2, ImVec2(graph_width, graph_height), 8);
-	// ImGui::PlotLines("Graph", values, IM_ARRAYSIZE(values), 0, "", -0.5f, 1.0f, ImVec2(graph_width, graph_height));
+	// if (Data::points.size() > 0)
+	// {
+  //   static float values[10] = {};
+  //   int i = 0;
+  //   for (Vector2* point : Data::points)
+  //   {
+  //   	values[i] = point->x/100;
+  //   	i++;
+  //   }
+	// 	ImGui::PlotLines("", values, IM_ARRAYSIZE(values), 0, "", -0.5f, 1.0f, ImVec2(graph_width, graph_height));
+	// }
 	ImGui::End();
 }

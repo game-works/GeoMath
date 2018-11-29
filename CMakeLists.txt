@@ -7,8 +7,10 @@ project(MathProject)
 # Your variables
 set(LIB_IMGUI "includes/imgui")
 set(LIB_IMGUI_SFML "includes/imgui-sfml")
-set(OUTPUT_NAME "app")
+set(OUTPUT_NAME "MathProject")
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
+add_compile_options(-Wall -Wextra -Wpedantic)
 
 # Find OpenGL
 # See https://cmake.org/cmake/help/v3.0/module/FindOpenGL.html for more info
@@ -17,7 +19,7 @@ find_package(OpenGL REQUIRED)
 # Additional include directories
 include_directories(${OPENGL_INCLUDE_DIR} ${LIB_IMGUI} ${LIB_IMGUI_SFML})
 
-# Executable name is "app"
+# Executable name is "MathProject"
 add_executable(${OUTPUT_NAME}
     # List of source files
     src/main.cpp
@@ -33,6 +35,6 @@ add_executable(${OUTPUT_NAME}
     ${LIB_IMGUI_SFML}/imgui-SFML.cpp
 )
 
-# What must be linked to the app
+# What must be linked to the MathProject
 target_link_libraries(${OUTPUT_NAME} ${OPENGL_LIBRARIES} sfml-graphics sfml-window sfml-system)
 install(TARGETS ${OUTPUT_NAME} DESTINATION .)

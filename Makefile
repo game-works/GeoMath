@@ -1,11 +1,19 @@
-test:
-	./bin/app
+release: rebuild-release
+	cmake --build build/release --target install --config Release
+	./build/release/MathProject
 
-compile:
-	cmake --build build --target install
+debug: rebuild-debug
+	cmake --build build/debug --target install --config Debug
+	./build/debug/MathProject
 
-rebuild: clean
-	cmake -H. -Bbuild -DCMAKE_INSTALL_PREFIX:PATH=`realpath bin`
+rebuild-release:
+	cmake -H. -Bbuild/release -DCMAKE_INSTALL_PREFIX:PATH=`realpath bin`
 
-clean:
-	rm -rf build
+rebuild-debug:
+	cmake -H. -Bbuild/debug -DCMAKE_INSTALL_PREFIX:PATH=`realpath bin`
+
+clean-release:
+	rm -rf build/release
+
+clean-debug:
+	rm -rf build/debug

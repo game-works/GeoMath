@@ -7,11 +7,16 @@
 #include "graph.h"
 #include "data.h"
 
+#ifndef DEBUG
+	#define DEBUG true
+#endif
+
 int main()
 {
 	App* app = new App("Math Project", 1280, 800);
 	App::version = "0.0.2";
 	App::isRunning = true;
+
 	Menu* menu = new Menu();
 	Graph* graph = new Graph();
 	Data* data = new Data();
@@ -20,7 +25,9 @@ int main()
 	{
 		app->Process();
 		app->Update();
+#if DEBUG
 		ImGui::ShowDemoWindow();
+#endif
 		menu->Update();
 		graph->Update();
 		data->Update();
