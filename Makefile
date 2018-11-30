@@ -1,19 +1,12 @@
-release: rebuild-release
-	cmake --build build/release --target install --config Release
-	./build/release/MathProject
+PROJECT_NAME = MathProject
+BUILD = Debug
 
-debug: rebuild-debug
-	cmake --build build/debug --target install --config Debug
-	./build/debug/MathProject
+test:
+	cmake --build build/${BUILD} --target install
+	./bin/${BUILD}/${PROJECT_NAME}
 
-rebuild-release:
-	cmake -H. -Bbuild/release -DCMAKE_INSTALL_PREFIX:PATH=`realpath bin`
+rebuild:
+	cmake -H. -Bbuild/${BUILD} -DCMAKE_BUILD_TYPE=${BUILD} -DCMAKE_INSTALL_PREFIX:PATH=`realpath bin/${BUILD}`
 
-rebuild-debug:
-	cmake -H. -Bbuild/debug -DCMAKE_INSTALL_PREFIX:PATH=`realpath bin`
-
-clean-release:
-	rm -rf build/release
-
-clean-debug:
-	rm -rf build/debug
+clean:
+	rm -rf build/${BUILD}

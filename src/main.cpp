@@ -7,9 +7,9 @@
 #include "graph.h"
 #include "data.h"
 
-#ifndef DEBUG
-	#define DEBUG true
-#endif
+// #ifndef DEBUG
+// 	#define DEBUG true
+// #endif
 
 int main()
 {
@@ -25,7 +25,7 @@ int main()
 	{
 		app->Process();
 		app->Update();
-#if DEBUG
+#if DebugMode
 		ImGui::ShowDemoWindow();
 #endif
 		menu->Update();

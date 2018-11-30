@@ -2,6 +2,7 @@
 cmake_minimum_required(VERSION 3.4)
 
 # Project name (no spaces)
+SET(CMAKE_CONFIGURATION_TYPES ${CMAKE_BUILD_TYPE} CACHE STRING "" FORCE)
 project(MathProject)
 
 # Your variables
@@ -34,6 +35,8 @@ add_executable(${OUTPUT_NAME}
     ${LIB_IMGUI}/imgui_widgets.cpp
     ${LIB_IMGUI_SFML}/imgui-SFML.cpp
 )
+
+target_compile_definitions(${OUTPUT_NAME} PRIVATE "${CMAKE_BUILD_TYPE}Mode")
 
 # What must be linked to the MathProject
 target_link_libraries(${OUTPUT_NAME} ${OPENGL_LIBRARIES} sfml-graphics sfml-window sfml-system)
