@@ -11,6 +11,7 @@
 #include "data.h"
 
 bool Menu::isShowing = true;
+bool Menu::isShowHelp = true;
 bool Menu::show_exit_confirmation = false;
 bool Menu::show_about_us = false;
 bool Menu::show_about_software = false;
@@ -79,6 +80,8 @@ void Menu::Update()
 		}
 		if (ImGui::BeginMenu("View"))
 		{
+			ImGui::Checkbox("Show Help Markers", &Menu::isShowHelp);
+			ImGui::Separator();
 			ImGui::Checkbox("Graph", &Graph::isShowing);
 			ImGui::Checkbox("Points", &Points::isShowing);
 			ImGui::Checkbox("Data", &Data::isShowing);

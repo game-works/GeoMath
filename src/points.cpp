@@ -4,6 +4,7 @@
 #include "menu.h"
 #include "graph.h"
 #include "application.h"
+#include "helpers.h"
 
 bool Points::isShowing = true;
 std::vector<Vector2*> Points::points;
@@ -43,6 +44,8 @@ void Points::Update()
 		if (ImGui::Button("Delete Point"))
 			points.pop_back();
 
+		ImGui::SameLine(); Helpers::ShowHelp("Delete A Point");
+
 		i++;
 		ImGui::NewLine();
 		ImGui::PopID();
@@ -50,6 +53,8 @@ void Points::Update()
 
 	if (ImGui::Button("New Point"))
 		points.push_back(new Vector2());
+
+	ImGui::SameLine(); Helpers::ShowHelp("Add A New Point");
 	ImGui::PopItemWidth();
 	ImGui::End();
 }

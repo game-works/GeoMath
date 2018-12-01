@@ -11,6 +11,7 @@ private:
 
 public:
 	static bool isShowing;
+	static bool isShowHelp;
 	static bool show_exit_confirmation;
 	static bool show_about_us;
 	static bool show_about_software;

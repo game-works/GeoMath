@@ -10,4 +10,5 @@ rebuild:
 	cp build/${BUILD}/compile_commands.json build/
 
 clean:
+	rm build/compile_commands.json
 	rm -rf build/${BUILD}
