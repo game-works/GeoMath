@@ -1,17 +1,20 @@
 #include <stdio.h>
 #include <iostream>
 #include "imgui.h"
+#include "imgui_internal.h"
 #include "application.h"
 #include "menu.h"
 #include "popup.h"
 #include "button.h"
 #include "graph.h"
+#include "points.h"
 #include "data.h"
 
 bool Menu::isShowing = true;
 bool Menu::show_exit_confirmation = false;
 bool Menu::show_about_us = false;
 bool Menu::show_about_software = false;
+float Menu::height;
 
 Menu::Menu()
 {
@@ -65,6 +68,10 @@ void Menu::Update()
 
 	if (ImGui::BeginMainMenuBar())
 	{
+		static ImGuiContext& g = *GImGui;
+		static ImGuiWindow* window = g.CurrentWindow;
+		height = window->MenuBarHeight();
+
 		if (ImGui::BeginMenu("File"))
 		{
 			if (ImGui::MenuItem("Exit")) show_exit_confirmation = true;
@@ -73,6 +80,7 @@ void Menu::Update()
 		if (ImGui::BeginMenu("View"))
 		{
 			ImGui::Checkbox("Graph", &Graph::isShowing);
+			ImGui::Checkbox("Points", &Points::isShowing);
 			ImGui::Checkbox("Data", &Data::isShowing);
 			ImGui::EndMenu();
 		}

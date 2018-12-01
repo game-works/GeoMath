@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include "imgui.h"
+#include "imgui_internal.h"
 #include "imgui-SFML.h"
 #include "SFML/Graphics/RenderWindow.hpp"
 #include "SFML/System/Clock.hpp"
@@ -8,7 +9,6 @@
 
 class App
 {
-//PROPERTIES
 private:
 	sf::RenderWindow* window;
 	sf::Clock dt;
@@ -18,13 +18,14 @@ private:
 public:
 	static const char* window_title;
 	static const char* version;
+	static ImGuiWindowFlags flags;
+	static bool isRunning;
+	static bool isFullscreen;
 	static int width;
 	static int height;
-	static bool isRunning;
 
-//METHODS
 public:
-	App(const char* title, int w, int h);
+	App(const char* title, int w, int h, bool isFullscreen);
 	~App();
 	void Process();
 	void Update();

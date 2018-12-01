@@ -13,7 +13,7 @@ Popup::Popup(const char* str, const char* text)
 
 Popup::~Popup()
 {
-	std::cout << "Popup Deleted" << std::endl;
+	std::cout << "Popup " << ID << "Deleted" << std::endl;
 }
 
 void Popup::Update()
@@ -21,7 +21,7 @@ void Popup::Update()
 	if (!isShowing)
 		return;
 	ImGui::OpenPopup(ID);
-	if (ImGui::BeginPopupModal(ID, NULL, ImGuiWindowFlags_AlwaysAutoResize))
+	if (ImGui::BeginPopupModal(ID, NULL, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoSavedSettings))
 	{
 		ImGui::NewLine();
 		ImGui::Text(text, "%s");

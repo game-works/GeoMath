@@ -1,19 +1,22 @@
 #include <iostream>
 #include "application.h"
 
-bool App::isRunning = false;
 const char* App::window_title;
+const char* App::version;
+ImGuiWindowFlags App::flags = ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse;
+bool App::isRunning = false;
+bool App::isFullscreen = false;
 int App::width;
 int App::height;
-const char* App::version = "0.0.0";
 
-App::App(const char* title, int w, int h)
+App::App(const char* title, int w, int h, bool fs)
 {
 	window_title = title;
 	width = w;
 	height = h;
+	isFullscreen = fs;
 
-	window = new sf::RenderWindow(sf::VideoMode(width, height), window_title);
+	window = new sf::RenderWindow(sf::VideoMode(width, height), window_title, (App::isFullscreen) ? sf::Style::Fullscreen : sf::Style::Default);
 	window->setVerticalSyncEnabled(true);
 	ImGui::SFML::Init(*window);
 	window->setTitle(window_title);

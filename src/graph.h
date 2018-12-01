@@ -4,14 +4,10 @@
 class Graph
 {
 private:
-	ImGuiWindowFlags flags;
-	double main_width;
-	double main_height;
-	double graph_width;
-	double graph_height;
 
 public:
 	static bool isShowing;
+	double x, y, w, h;
 
 public:
 	Graph();

@@ -2,7 +2,6 @@
 cmake_minimum_required(VERSION 3.4)
 
 # Project name (no spaces)
-SET(CMAKE_CONFIGURATION_TYPES ${CMAKE_BUILD_TYPE} CACHE STRING "" FORCE)
 project(MathProject)
 
 # Your variables
@@ -27,9 +26,10 @@ add_executable(${OUTPUT_NAME}
     src/application.cpp
     src/menu.cpp
     src/popup.cpp
-    src/graph.cpp
-    src/data.cpp
     src/button.cpp
+    src/graph.cpp
+    src/points.cpp
+    src/data.cpp
     ${LIB_IMGUI}/imgui.cpp
     ${LIB_IMGUI}/imgui_draw.cpp
     ${LIB_IMGUI}/imgui_widgets.cpp

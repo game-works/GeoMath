@@ -1,5 +1,6 @@
 #pragma once
 #include "popup.h"
+#include "application.h"
 
 class Menu
 {
@@ -13,11 +14,11 @@ public:
 	static bool show_exit_confirmation;
 	static bool show_about_us;
 	static bool show_about_software;
+	static float height;
+	App* context_app;
 
 public:
 	Menu();
 	~Menu();
 	void Update();
-	void HandleExitConfirmation();
-	void HandleAboutConfirmation(bool &target, int &choice);
 };
