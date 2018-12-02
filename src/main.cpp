@@ -8,17 +8,26 @@
 #include "points.h"
 #include "data.h"
 
+App* app;
+Menu* menu;
+Graph* graph;
+Points* points;
+Data* data;
+
+void SetLayoutA();
+void SetLayoutB();
+
 int main()
 {
-	App* app = new App("Math Project", 1024, 720, false);
+	app = new App("Math Project", 1024, 720, false);
+	menu = new Menu();
+	graph = new Graph();
+	points = new Points();
+	data = new Data();
+
 	App::version = "0.0.2";
 	App::isRunning = true;
-
-	Menu* menu = new Menu();
 	menu->context_app = app;
-	Graph* graph = new Graph();
-	Points* points = new Points();
-	Data* data = new Data();
 
 	while (App::isRunning)
 	{
@@ -30,23 +39,10 @@ int main()
 
 		menu->Update();
 
-		static int pad_x = 16;
-		static int pad_y = 16;
-		static int y = Menu::height + pad_y;
-		static double width = App::width - (pad_x * 4);
-		static double height = App::height - Menu::height - pad_y * 2;
-		graph->x = pad_x;
-		graph->y = y;
-		graph->w = width * 0.4;
-		graph->h = height;
-		points->x = graph->x + graph->w + pad_x;
-		points->y = y;
-		points->w = width * 0.35;
-		points->h = height;
-		data->x = points->x + points->w + pad_x;
-		data->y = y;
-		data->w = width * 0.25;
-		data->h = height;
+		if (Menu::layout == 1)
+			SetLayoutA();
+		else if (Menu::layout == 2)
+			SetLayoutB();
 
 		graph->Update();
 		points->Update();
@@ -58,4 +54,48 @@ int main()
 	delete graph;
 	delete menu;
 	delete app;
+}
+
+void SetLayoutA()
+{
+	int pad_x = 16;
+	int pad_y = 16;
+	int y = Menu::height + pad_y;
+	double width = App::width - (pad_x * 4);
+	double height = App::height - Menu::height - pad_y * 2;
+	graph->x = pad_x;
+	graph->y = y;
+	graph->w = width * 0.4;
+	graph->h = height;
+	points->x = graph->x + graph->w + pad_x;
+	points->y = y;
+	points->w = width * 0.25;
+	points->h = height;
+	data->x = points->x + points->w + pad_x;
+	data->y = y;
+	data->w = width * 0.35;
+	data->h = height;
+}
+
+void SetLayoutB()
+{
+	int pad_x = 16;
+	int pad_y = 16;
+	int y = Menu::height + pad_y;
+	double width = App::width - (pad_x * 2);
+	double height = App::height - Menu::height - (pad_y * 3);
+	graph->x = pad_x;
+	graph->y = y;
+	graph->w = width;
+	graph->h = height * 0.55;
+
+	points->x = pad_x;
+	points->y = graph->y + graph->h + pad_y;
+	points->w = graph->w * 0.5 - pad_x;
+	points->h = height * 0.45;
+
+	data->x = points->x + points->w + pad_x;
+	data->y = points->y;
+	data->w = graph->w * 0.5;
+	data->h = points->h;
 }

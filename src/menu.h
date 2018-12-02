@@ -16,6 +16,7 @@ public:
 	static bool show_about_us;
 	static bool show_about_software;
 	static float height;
+	static int layout;
 	App* context_app;
 
 public:

@@ -1,9 +1,12 @@
-#include <stdio.h>
 #include <iostream>
+#include <numeric>
+#include <stdio.h>
+#include <string.h>
 #include "points.h"
 #include "menu.h"
 #include "graph.h"
 #include "application.h"
+#include "data.h"
 #include "helpers.h"
 
 bool Points::isShowing = true;
@@ -24,16 +27,16 @@ void Points::Update()
 	if (!isShowing)
 		return;
 
-	ImGui::SetNextWindowPos(ImVec2(x, y), ImGuiCond_FirstUseEver);
-	ImGui::SetNextWindowSize(ImVec2(w, h), ImGuiCond_FirstUseEver);
+	ImGui::SetNextWindowPos(ImVec2(x, y));
+	ImGui::SetNextWindowSize(ImVec2(w, h));
 	ImGui::Begin(title, NULL, App::flags);
-	ImGui::PushItemWidth(ImGui::GetWindowContentRegionWidth());
 	int i = 0;
 	for (Vector2* point : points)
 	{
 		ImGui::PushID(i);
-    char buf[128];
+		char buf[128];
     sprintf(buf, "Point %d", i);
+		ImGui::Separator();
 		ImGui::Text("%s", buf);
 		int x = (int)point->x;
 		int y = (int)point->y;
@@ -41,8 +44,11 @@ void Points::Update()
 			point->x = x;
 		if (ImGui::InputInt("y", &y))
 			point->y = y;
-		if (ImGui::Button("Delete Point"))
+		if (ImGui::Button("Delete Point", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.75, 0)))
+		{
+			Data::items.pop_back();
 			points.pop_back();
+		}
 
 		ImGui::SameLine(); Helpers::ShowHelp("Delete A Point");
 
@@ -51,10 +57,15 @@ void Points::Update()
 		ImGui::PopID();
 	}
 
-	if (ImGui::Button("New Point"))
+	if (ImGui::Button("New Point", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.75, 0)))
+	{
+		char buf[128];
+    sprintf(buf, "Point %d", i);
+		std::string str(buf);
+		Data::items.push_back(str);
 		points.push_back(new Vector2());
+	}
 
 	ImGui::SameLine(); Helpers::ShowHelp("Add A New Point");
-	ImGui::PopItemWidth();
 	ImGui::End();
 }

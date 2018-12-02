@@ -20,8 +20,8 @@ void Graph::Update()
 	if (!isShowing)
 		return;
 
-	ImGui::SetNextWindowPos(ImVec2(x, y), ImGuiCond_FirstUseEver);
-	ImGui::SetNextWindowSize(ImVec2(w, h), ImGuiCond_FirstUseEver);
+	ImGui::SetNextWindowPos(ImVec2(x, y));
+	ImGui::SetNextWindowSize(ImVec2(w, h));
 	ImGui::Begin("Graph", NULL, App::flags);
 	// if (Data::points.size() > 0)
 	// {

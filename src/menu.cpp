@@ -16,6 +16,7 @@ bool Menu::show_exit_confirmation = false;
 bool Menu::show_about_us = false;
 bool Menu::show_about_software = false;
 float Menu::height;
+int Menu::layout = 1;
 
 Menu::Menu()
 {
@@ -80,6 +81,13 @@ void Menu::Update()
 		}
 		if (ImGui::BeginMenu("View"))
 		{
+    	if (ImGui::BeginMenu("Layouts"))
+    	{
+        if (ImGui::MenuItem("Layout 1", NULL, (Menu::layout == 1) ? true : false)) Menu::layout = 1;
+        if (ImGui::MenuItem("Layout 2", NULL, (Menu::layout == 2) ? true : false)) Menu::layout = 2;
+        ImGui::EndMenu();
+    	}
+			ImGui::Separator();
 			ImGui::Checkbox("Show Help Markers", &Menu::isShowHelp);
 			ImGui::Separator();
 			ImGui::Checkbox("Graph", &Graph::isShowing);

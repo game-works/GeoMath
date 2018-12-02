@@ -19,6 +19,9 @@ CC ?= clang
 CXX ?= clang++
 CXXFLAGS := ${CXXFLAGS} -pedantic -D _$(shell echo ${CONFIG} | tr a-z A-Z)
 
+test:
+	./${BIN_DIR}/${PROJECT_NAME}-${CONFIG}
+
 compile:
 	${CXX} ${CXXFLAGS} -o ${BIN_DIR}/${PROJECT_NAME}-${CONFIG} ${SOURCES} ${INCLUDES} ${LINKS}
 
