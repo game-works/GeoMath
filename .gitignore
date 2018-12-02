@@ -1,3 +1,6 @@
 build/*
 bin/*
+bin-obj/*
+compile_commands/*
 *.ini
+MathProject.make
