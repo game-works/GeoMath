@@ -24,7 +24,7 @@ int main()
 	{
 		app->Process();
 		app->Update();
-#if DebugMode
+#if _DEBUG
 		ImGui::ShowDemoWindow();
 #endif
 
