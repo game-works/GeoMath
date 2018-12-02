@@ -30,7 +30,6 @@ add_executable(${OUTPUT_NAME}
     src/graph.cpp
     src/points.cpp
     src/data.cpp
-    src/helpers.cpp
     ${LIB_IMGUI}/imgui.cpp
     ${LIB_IMGUI}/imgui_draw.cpp
     ${LIB_IMGUI}/imgui_widgets.cpp
