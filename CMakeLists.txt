@@ -5,8 +5,8 @@ cmake_minimum_required(VERSION 3.4)
 project(MathProject)
 
 # Your variables
-set(LIB_IMGUI "includes/imgui")
-set(LIB_IMGUI_SFML "includes/imgui-sfml")
+set(LIB_IMGUI "include/imgui")
+set(LIB_IMGUI_SFML "include/imgui-sfml")
 set(OUTPUT_NAME "MathProject")
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
