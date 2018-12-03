@@ -22,7 +22,7 @@ public:
 	static int a;
 	static int b;
 	static float distance;
-	static Vector2 slope;
+	static Vector2* slope;
 	static bool calculated;
 	static bool autohide;
 	static bool is_custom_slope;

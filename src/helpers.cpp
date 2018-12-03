@@ -59,24 +59,22 @@ Vector2 Helpers::getSlope(Vector2 a, Vector2 b)
 	return Vector2(x, y);
 }
 
-std::string Helpers::GetEquationOfTheLine(const char* type, Vector2 a, Vector2 slope)
+std::string Helpers::GetEquationOfTheLineStandard(Vector2 a, Vector2 slope)
 {
 	float m = (slope.y/slope.x);
 	float y1 = a.y;
 	float x1 = a.x;
 	char sf[64];
-	char gf[64];
+	sprintf(sf, "%gx - y = %g", m, (m * x1) + (y1 * -1)); //simplification
+	return std::string(sf);
+}
 
-	if (strcmp(type, "standard"))
-	{
-		sprintf(sf, "%gx - y = %g", m, (m * x1) + (y1 * -1)); //simplification
-		return std::string(sf);
-	}
-	else if (strcmp(type, "general"))
-	{
-		sprintf(gf, "%gx - y + %g = 0", m, (m * x1) + (y1 * -1)); //simplification
-		return std::string(gf);
-	}
-	else
-		return "";
+std::string Helpers::GetEquationOfTheLineGeneral(Vector2 a, Vector2 slope)
+{
+	float m = (slope.y/slope.x);
+	float y1 = a.y;
+	float x1 = a.x;
+	char gf[64];
+	sprintf(gf, "%gx - y + %g = 0", m, (m * x1) + (y1 * -1)); //simplification
+	return std::string(gf);
 }
