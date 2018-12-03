@@ -15,6 +15,14 @@ std::vector<Vector2*> Points::points;
 Points::Points()
 {
 	title = "Points";
+	for (int i = 0; i < 2; i++)
+	{
+		points.push_back(new Vector2());
+		char buf[128];
+  	sprintf(buf, "Point %d", i);
+		std::string str(buf);
+		Data::items.push_back(str);
+	}
 }
 
 Points::~Points()
@@ -44,14 +52,17 @@ void Points::Update()
 			point->x = x;
 		if (ImGui::InputInt("y", &y))
 			point->y = y;
-		if (ImGui::Button("Delete Point", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.75, 0)))
-		{
-			Data::Reset();
-			Data::items.pop_back();
-			points.pop_back();
-		}
 
-		ImGui::SameLine(); Helpers::ShowHelp("Delete A Point");
+		if (points.size() > 2)
+		{
+			if (ImGui::Button("Delete Point", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.75, 0)))
+			{
+				Data::Reset();
+				Data::items.pop_back();
+				points.pop_back();
+			}
+			ImGui::SameLine(); Helpers::ShowHelp("Delete A Point");
+		}
 
 		i++;
 		ImGui::NewLine();

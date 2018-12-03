@@ -21,21 +21,6 @@ void Helpers::ShowHelp(const char* desc)
 	}
 }
 
-float Helpers::getDistance(Vector2 a, Vector2 b)
-{
-	float x = (a.x - b.x) * (a.x - b.x);
-	float y = (a.y - b.y) * (a.y - b.y);
-	float d = sqrt(x + y);
-	return d;
-}
-
-Vector2 Helpers::getSlope(Vector2 a, Vector2 b)
-{
-	float x = (b.x - a.x);
-	float y = (b.y - a.y);
-	return Vector2(x, y);
-}
-
 void Helpers::BeginCombo(std::vector<std::string> items, const char* str, const char* &current_item, int &a)
 {
 	if (ImGui::BeginCombo(str, current_item))
@@ -57,4 +42,41 @@ void Helpers::BeginCombo(std::vector<std::string> items, const char* str, const 
 		}
 		ImGui::EndCombo();
 	}
+}
+
+float Helpers::getDistance(Vector2 a, Vector2 b)
+{
+	float x = (a.x - b.x) * (a.x - b.x);
+	float y = (a.y - b.y) * (a.y - b.y);
+	float d = sqrt(x + y);
+	return d;
+}
+
+Vector2 Helpers::getSlope(Vector2 a, Vector2 b)
+{
+	float x = (b.x - a.x);
+	float y = (b.y - a.y);
+	return Vector2(x, y);
+}
+
+std::string Helpers::GetEquationOfTheLine(const char* type, Vector2 a, Vector2 slope)
+{
+	float m = (slope.y/slope.x);
+	float y1 = a.y;
+	float x1 = a.x;
+	char sf[64];
+	char gf[64];
+
+	if (strcmp(type, "standard"))
+	{
+		sprintf(sf, "%gx - y = %g", m, (m * x1) + (y1 * -1)); //simplification
+		return std::string(sf);
+	}
+	else if (strcmp(type, "general"))
+	{
+		sprintf(gf, "%gx - y + %g = 0", m, (m * x1) + (y1 * -1)); //simplification
+		return std::string(gf);
+	}
+	else
+		return "";
 }
