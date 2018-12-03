@@ -88,6 +88,7 @@ void Menu::Update()
         ImGui::EndMenu();
     	}
 			ImGui::Separator();
+			ImGui::Checkbox("Auto Hide", &Data::autohide);
 			ImGui::Checkbox("Show Help Markers", &Menu::isShowHelp);
 			ImGui::Separator();
 			ImGui::Checkbox("Graph", &Graph::isShowing);

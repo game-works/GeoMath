@@ -2,6 +2,7 @@
 #include <math.h>
 #include <string.h>
 #include <stdio.h>
+#include <vector>
 #include "imgui.h"
 #include "menu.h"
 
@@ -33,4 +34,27 @@ Vector2 Helpers::getSlope(Vector2 a, Vector2 b)
 	float x = (b.x - a.x);
 	float y = (b.y - a.y);
 	return Vector2(x, y);
+}
+
+void Helpers::BeginCombo(std::vector<std::string> items, const char* str, const char* &current_item, int &a)
+{
+	if (ImGui::BeginCombo(str, current_item))
+	{
+		int i = 0;
+		for (const std::string& str : items)
+		{
+			const char* item = str.c_str();
+			bool isSelected = (current_item == item);
+			if (ImGui::Selectable(item, isSelected))
+			{
+				current_item = item;
+				a = i;
+			}
+			if (isSelected)
+				ImGui::SetItemDefaultFocus();
+
+			i++;
+		}
+		ImGui::EndCombo();
+	}
 }

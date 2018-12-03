@@ -46,6 +46,7 @@ void Points::Update()
 			point->y = y;
 		if (ImGui::Button("Delete Point", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.75, 0)))
 		{
+			Data::Reset();
 			Data::items.pop_back();
 			points.pop_back();
 		}
