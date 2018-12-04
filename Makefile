@@ -1,11 +1,12 @@
 PROJECT_NAME := MathProject
 BIN_DIR := bin
 SRC_DIR := src
+INCLUDE_DIR := include
 
 CONFIG := Debug
 
-LIB_IMGUI := include/imgui
-LIB_IMGUI_SFML := include/imgui-sfml
+LIB_IMGUI := ${INCLUDE_DIR}/imgui
+LIB_IMGUI_SFML := ${INCLUDE_DIR}/imgui-sfml
 
 SOURCES := $(wildcard ${SRC_DIR}/*.cpp)
 SOURCES += $(wildcard ${LIB_IMGUI}/*.cpp)
@@ -27,6 +28,4 @@ compile:
 
 clean:
 	rm -rf ${BIN_DIR}
-	rm -rf ${OBJ_DIR}
 	mkdir ${BIN_DIR}
-	mkdir ${OBJ_DIR}

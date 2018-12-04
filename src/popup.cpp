@@ -13,7 +13,7 @@ Popup::Popup(const char* str, const char* text)
 
 Popup::~Popup()
 {
-	std::cout << "Popup " << ID << "Deleted" << std::endl;
+	std::cout << "Popup " << ID << " Deleted" << std::endl;
 }
 
 void Popup::Update()

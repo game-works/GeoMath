@@ -23,13 +23,14 @@ void Graph::Update()
 	ImGui::SetNextWindowPos(ImVec2(x, y));
 	ImGui::SetNextWindowSize(ImVec2(w, h));
 	ImGui::Begin("Graph", NULL, App::flags);
-	// if (Data::points.size() > 0)
+	// if (Points::points.size() > 0)
 	// {
   //   static float values[10] = {};
   //   int i = 0;
-  //   for (Vector2* point : Data::points)
+  //   for (Vector2* point : Points::points)
   //   {
-  //   	values[i] = point->x/100;
+  //   	float n = point->x*i/100;
+  //   	values[i] = n;
   //   	i++;
   //   }
 	// 	ImGui::PlotLines("", values, IM_ARRAYSIZE(values), 0, "", -0.5f, 1.0f, ImVec2(graph_width, graph_height));

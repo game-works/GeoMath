@@ -16,7 +16,7 @@ bool Menu::show_exit_confirmation = false;
 bool Menu::show_about_us = false;
 bool Menu::show_about_software = false;
 float Menu::height;
-int Menu::layout = 1;
+int Menu::layout = 2;
 
 Menu::Menu()
 {

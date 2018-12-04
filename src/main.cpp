@@ -67,6 +67,8 @@ void SetLayoutA()
 	graph->y = y;
 	graph->w = width * 0.4;
 	graph->h = height;
+	graph->graph_width = graph->w * 0.9;
+	graph->graph_height = graph->h * 0.9;
 	points->x = graph->x + graph->w + pad_x;
 	points->y = y;
 	points->w = width * 0.25;
@@ -88,6 +90,8 @@ void SetLayoutB()
 	graph->y = y;
 	graph->w = width;
 	graph->h = height * 0.55;
+	graph->graph_width = graph->w * 0.9;
+	graph->graph_height = graph->h * 0.9;
 
 	points->x = pad_x;
 	points->y = graph->y + graph->h + pad_y;
