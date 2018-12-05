@@ -2,5 +2,6 @@ build/*
 bin/*
 bin-obj/*
 compile_commands/*
+include/SFML/*
 *.ini
 MathProject.make
