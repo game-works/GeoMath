@@ -13,9 +13,12 @@ LIB_IMGUI_SFML := ${INCLUDE_DIR}/imgui-sfml
 SOURCES := $(wildcard ${SRC_DIR}/*.cpp)
 SOURCES += $(wildcard ${LIB_IMGUI}/*.cpp)
 SOURCES += $(wildcard ${LIB_IMGUI_SFML}/*.cpp)
+
 SOURCES := $(filter-out ${LIB_IMGUI}/imgui_demo.cpp, ${SOURCES})
 
-INCLUDES := -I${LIB_IMGUI} -I${LIB_IMGUI_SFML}
+OBJECTS :=
+
+INCLUDES := -I${LIB_IMGUI} -I${LIB_IMGUI_SFML} -I${LIB_TINYEXPR}
 LINKS := -lGL -lsfml-graphics -lsfml-window -lsfml-system
 
 CC ?= clang
@@ -35,14 +38,14 @@ CC = i686-w64-mingw32-gcc
 CXX = i686-w64-mingw32-g++
 endif
 
-CXXFLAGS := ${CXXFLAGS} -Wall -static-libgcc -static-libstdc++
+CXXFLAGS := ${CXXFLAGS} -Wall
 endif
 
 test:
 	./${BIN_DIR}/${PLATFORM}/${PROJECT_NAME}-${CONFIG}-${ARCHITECTURE}
 
 compile:
-	${CXX} ${CXXFLAGS} -o ${BIN_DIR}/${PLATFORM}/${PROJECT_NAME}-${CONFIG}-${ARCHITECTURE} ${SOURCES} ${INCLUDES} ${LINKS}
+	${CXX} ${CXXFLAGS} -o ${BIN_DIR}/${PLATFORM}/${PROJECT_NAME}-${CONFIG}-${ARCHITECTURE} ${SOURCES} ${OBJECTS} ${INCLUDES} ${LINKS}
 
 clean:
 	rm -rf ${BIN_DIR}
