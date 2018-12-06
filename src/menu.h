@@ -8,6 +8,7 @@ private:
 	Popup* exit_confirmation;
 	Popup* about_us;
 	Popup* about_software;
+	int style = 1; //0 = classic, 1 == dark, 2 == light
 
 public:
 	static bool isShowing;

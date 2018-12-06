@@ -22,6 +22,7 @@ int main()
 	app = new App("Math Project", 1024, 720, false);
 	menu = new Menu();
 	graph = new Graph();
+	graph->app = app;
 	points = new Points();
 	data = new Data();
 

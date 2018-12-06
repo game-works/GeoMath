@@ -10,12 +10,12 @@
 class App
 {
 private:
-	sf::RenderWindow* window;
 	sf::Clock dt;
 	sf::Event event;
 	sf::Color bgColor;
 
 public:
+	sf::RenderWindow* window;
 	static const char* window_title;
 	static const char* version;
 	static ImGuiWindowFlags flags;

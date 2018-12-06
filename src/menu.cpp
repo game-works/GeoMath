@@ -9,6 +9,7 @@
 #include "graph.h"
 #include "points.h"
 #include "data.h"
+#include "helpers.h"
 
 bool Menu::isShowing = true;
 bool Menu::isShowHelp = true;
@@ -76,6 +77,25 @@ void Menu::Update()
 
 		if (ImGui::BeginMenu("File"))
 		{
+			if (ImGui::BeginMenu("Theme"))
+			{
+  			if (ImGui::MenuItem("Classic", NULL, (style == 0) ? true : false))
+  			{
+  				style = 0;
+					ImGui::StyleColorsClassic();
+  			}
+  			if (ImGui::MenuItem("Dark", NULL, (style == 1) ? true : false))
+  			{
+  				style = 1;
+					ImGui::StyleColorsDark();
+  			}
+  			if (ImGui::MenuItem("Light", NULL, (style == 2) ? true : false))
+  			{
+  				style = 2;
+					ImGui::StyleColorsLight();
+  			}
+  			ImGui::EndMenu();
+			}
 			if (ImGui::MenuItem("Exit")) show_exit_confirmation = true;
 			ImGui::EndMenu();
 		}

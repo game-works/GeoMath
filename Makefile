@@ -1,5 +1,6 @@
 PROJECT_NAME := MathProject
 BIN_DIR := bin
+OBJ_DIR := bin-obj
 SRC_DIR := src
 INCLUDE_DIR := include
 
@@ -16,9 +17,9 @@ SOURCES += $(wildcard ${LIB_IMGUI_SFML}/*.cpp)
 
 SOURCES := $(filter-out ${LIB_IMGUI}/imgui_demo.cpp, ${SOURCES})
 
-OBJECTS :=
+OBJECTS := $(patsubst $(SRC_DIR)/%.cpp, $(OBJ_DIR)/%.o, $(SOURCES))
 
-INCLUDES := -I${LIB_IMGUI} -I${LIB_IMGUI_SFML} -I${LIB_TINYEXPR}
+INCLUDES := -I${LIB_IMGUI} -I${LIB_IMGUI_SFML}
 LINKS := -lGL -lsfml-graphics -lsfml-window -lsfml-system
 
 CC ?= clang
@@ -41,11 +42,19 @@ endif
 CXXFLAGS := ${CXXFLAGS} -Wall
 endif
 
+EXECUTABLE := ${PROJECT_NAME}-${CONFIG}-${ARCHITECTURE}
+
+${EXECUTABLE}: ${OBJECTS}
+	${CXX} ${LDFLAGS} ${CXXFLAGS} -o ${BIN_DIR}/${PLATFORM}/$@ $^ ${INCLUDES} ${LINKS}
+
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
+	${CXX} $(CXXFLAGS) -c -o $@ $< ${INCLUDES}
+
 test:
-	./${BIN_DIR}/${PLATFORM}/${PROJECT_NAME}-${CONFIG}-${ARCHITECTURE}
+	./${BIN_DIR}/${PLATFORM}/${EXECUTABLE}
 
 compile:
-	${CXX} ${CXXFLAGS} -o ${BIN_DIR}/${PLATFORM}/${PROJECT_NAME}-${CONFIG}-${ARCHITECTURE} ${SOURCES} ${OBJECTS} ${INCLUDES} ${LINKS}
+	${CXX} ${CXXFLAGS} -o ${BIN_DIR}/${PLATFORM}/${EXECUTABLE} ${SOURCES} ${INCLUDES} ${LINKS}
 
 clean:
 	rm -rf ${BIN_DIR}
