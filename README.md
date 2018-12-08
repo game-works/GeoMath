@@ -5,7 +5,6 @@ A project software for helping students on Analytical Geometry and other educati
 ## Compiler
 * Clang/Clang++ (7.0.0) (Linux)
 * i686-mingw32-w64-gcc/g++ (GCC 8.2.0) (Cross-compiler for Windows x86 (32-bit))
-* x86_64-mingw32-w64-gcc/g++ (GCC 8.2.0) (Cross-compiler for Windows x86_64 (64-bit))
 
 ## Dependencies / Libraries Used:
 * SFML (2.5.1)
@@ -13,6 +12,7 @@ A project software for helping students on Analytical Geometry and other educati
 * ImGUI-SFML
 
 ## Screenshots
+Running on Windows
 ![On Windows 1](https://github.com/flamendless/MathProject/blob/master/assets/screenshots/windows1.png)
 ![On Windows 2](https://github.com/flamendless/MathProject/blob/master/assets/screenshots/windows2.png)
 ![On Windows 3](https://github.com/flamendless/MathProject/blob/master/assets/screenshots/windows3.png)
