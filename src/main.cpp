@@ -30,7 +30,7 @@ int main()
 	points = new Points();
 	data = new Data();
 
-	App::version = "0.0.5";
+	App::version = "0.0.9";
 	App::isRunning = true;
 	menu->context_app = app;
 
