@@ -10,6 +10,7 @@
 #include "points.h"
 #include "data.h"
 #include "helpers.h"
+#include "user.h"
 
 bool Menu::isShowing = true;
 bool Menu::isShowHelp = true;
@@ -17,7 +18,6 @@ bool Menu::show_exit_confirmation = false;
 bool Menu::show_about_us = false;
 bool Menu::show_about_software = false;
 float Menu::height;
-int Menu::layout = 2;
 
 Menu::Menu()
 {
@@ -79,19 +79,19 @@ void Menu::Update()
 		{
 			if (ImGui::BeginMenu("Theme"))
 			{
-  			if (ImGui::MenuItem("Classic", NULL, (style == 0) ? true : false))
+  			if (ImGui::MenuItem("Classic", NULL, (User::style == 0) ? true : false))
   			{
-  				style = 0;
+					User::style = 0;
 					ImGui::StyleColorsClassic();
   			}
-  			if (ImGui::MenuItem("Dark", NULL, (style == 1) ? true : false))
+  			if (ImGui::MenuItem("Dark", NULL, (User::style == 1) ? true : false))
   			{
-  				style = 1;
+					User::style = 1;
 					ImGui::StyleColorsDark();
   			}
-  			if (ImGui::MenuItem("Light", NULL, (style == 2) ? true : false))
+  			if (ImGui::MenuItem("Light", NULL, (User::style == 2) ? true : false))
   			{
-  				style = 2;
+					User::style = 2;
 					ImGui::StyleColorsLight();
   			}
   			ImGui::EndMenu();
@@ -103,13 +103,14 @@ void Menu::Update()
 		{
     	if (ImGui::BeginMenu("Layouts"))
     	{
-        if (ImGui::MenuItem("Layout 1", NULL, (Menu::layout == 1) ? true : false)) Menu::layout = 1;
-        if (ImGui::MenuItem("Layout 2", NULL, (Menu::layout == 2) ? true : false)) Menu::layout = 2;
+        if (ImGui::MenuItem("Layout 1", NULL, (User::layout == 1) ? true : false)) User::layout = 1;
+        if (ImGui::MenuItem("Layout 2", NULL, (User::layout == 2) ? true : false)) User::layout = 2;
         ImGui::EndMenu();
     	}
 			ImGui::Separator();
 			ImGui::Checkbox("Auto Hide", &Data::autohide);
 			ImGui::Checkbox("Show Help Markers", &Menu::isShowHelp);
+			if (ImGui::Checkbox("Fullscreen Graph", &Graph::isFullscreen)) ImGui::SetWindowFocus("Graph");
 			ImGui::Separator();
 			ImGui::Checkbox("Graph", &Graph::isShowing);
 			ImGui::Checkbox("Points", &Points::isShowing);

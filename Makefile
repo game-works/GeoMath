@@ -17,7 +17,7 @@ SOURCES += $(wildcard ${LIB_IMGUI_SFML}/*.cpp)
 
 SOURCES := $(filter-out ${LIB_IMGUI}/imgui_demo.cpp, ${SOURCES})
 
-OBJECTS := $(patsubst $(SRC_DIR)/%.cpp, $(OBJ_DIR)/%.o, $(SOURCES))
+OBJECTS := $(patsubst $(SRC_DIR)/%.cpp, $(OBJ_DIR)/$(PLATFORM)/%.o, $(SOURCES))
 
 INCLUDES := -I${LIB_IMGUI} -I${LIB_IMGUI_SFML}
 LINKS := -lGL -lsfml-graphics -lsfml-window -lsfml-system
@@ -47,7 +47,7 @@ EXECUTABLE := ${PROJECT_NAME}-${CONFIG}-${ARCHITECTURE}
 ${EXECUTABLE}: ${OBJECTS}
 	${CXX} ${LDFLAGS} ${CXXFLAGS} -o ${BIN_DIR}/${PLATFORM}/$@ $^ ${INCLUDES} ${LINKS}
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
+$(OBJ_DIR)/$(PLATFORM)/%.o: $(SRC_DIR)/%.cpp
 	${CXX} $(CXXFLAGS) -c -o $@ $< ${INCLUDES}
 
 test:
@@ -58,6 +58,10 @@ compile:
 
 clean:
 	rm -rf ${BIN_DIR}
+	rm -rf ${OBJ_DIR}
+	mkdir ${OBJ_DIR}
+	mkdir ${OBJ_DIR}/Linux
+	mkdir ${OBJ_DIR}/Windows
 	mkdir ${BIN_DIR}
 	mkdir ${BIN_DIR}/Linux
 	mkdir ${BIN_DIR}/Windows

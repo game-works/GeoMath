@@ -3,12 +3,15 @@
 #include "imgui_demo.cpp"
 #include "imgui-SFML.h"
 #include "application.h"
+#include "startup.h"
 #include "menu.h"
 #include "graph.h"
 #include "points.h"
 #include "data.h"
+#include "user.h"
 
 App* app;
+Startup* startup;
 Menu* menu;
 Graph* graph;
 Points* points;
@@ -20,6 +23,7 @@ void SetLayoutB();
 int main()
 {
 	app = new App("Math Project", 1024, 720, false);
+	startup = new Startup();
 	menu = new Menu();
 	graph = new Graph();
 	graph->app = app;
@@ -38,11 +42,12 @@ int main()
 		ImGui::ShowDemoWindow();
 #endif
 
+		startup->Update();
 		menu->Update();
 
-		if (Menu::layout == 1)
+		if (User::layout == 1)
 			SetLayoutA();
-		else if (Menu::layout == 2)
+		else if (User::layout == 2)
 			SetLayoutB();
 
 		graph->Update();
@@ -54,6 +59,7 @@ int main()
 	delete points;
 	delete graph;
 	delete menu;
+	delete startup;
 	delete app;
 }
 
@@ -70,6 +76,8 @@ void SetLayoutA()
 	graph->h = height;
 	graph->graph_width = graph->w * 0.9;
 	graph->graph_height = graph->h * 0.9;
+	graph->full_w = width;
+	graph->full_h = height + pad_y;
 	points->x = graph->x + graph->w + pad_x;
 	points->y = y;
 	points->w = width * 0.25;
@@ -93,6 +101,8 @@ void SetLayoutB()
 	graph->h = height * 0.55;
 	graph->graph_width = graph->w * 0.9;
 	graph->graph_height = graph->h * 0.9;
+	graph->full_w = width;
+	graph->full_h = height + pad_y;
 
 	points->x = pad_x;
 	points->y = graph->y + graph->h + pad_y;

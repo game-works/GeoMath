@@ -20,6 +20,7 @@ void Popup::Update()
 {
 	if (!isShowing)
 		return;
+
 	ImGui::OpenPopup(ID);
 	if (ImGui::BeginPopupModal(ID, NULL, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoSavedSettings))
 	{

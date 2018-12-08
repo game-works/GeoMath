@@ -8,7 +8,6 @@ private:
 	Popup* exit_confirmation;
 	Popup* about_us;
 	Popup* about_software;
-	int style = 1; //0 = classic, 1 == dark, 2 == light
 
 public:
 	static bool isShowing;
@@ -17,7 +16,6 @@ public:
 	static bool show_about_us;
 	static bool show_about_software;
 	static float height;
-	static int layout;
 	App* context_app;
 
 public:
