@@ -1,0 +1,5 @@
+VERSION 0.1.1
+* Added assert message when user remove the "assets" folder that comes along the .zip
+
+VERSION 0.1.0 (BETA)
+* First Release
