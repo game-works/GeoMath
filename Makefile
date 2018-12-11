@@ -1,4 +1,4 @@
-PROJECT_NAME := MathProject
+PROJECT_NAME := GeoMath
 BIN_DIR := bin
 OBJ_DIR := bin-obj
 SRC_DIR := src

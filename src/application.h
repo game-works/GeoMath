@@ -18,6 +18,7 @@ public:
 	sf::RenderWindow* window;
 	static const char* window_title;
 	static const char* version;
+	static const char* date;
 	static ImGuiWindowFlags flags;
 	static bool isRunning;
 	static bool isFullscreen;

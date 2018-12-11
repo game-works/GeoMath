@@ -44,7 +44,7 @@ Menu::Menu()
 		}));
 
 	static char buf[128];
-	sprintf(buf, "Written in C++\nUsing ImGui\nVersion: %s", App::version);
+	sprintf(buf, "Written in C++\nUsing:\n* ImGui\n* SFML\nVersion: %s\nDate: %s", App::version, App::date);
 
 	about_software = new Popup("About Software", buf);
 	about_software->AddButton(new Button("Close", [](void)

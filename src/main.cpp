@@ -11,6 +11,7 @@
 #include "user.h"
 
 App* app;
+User* user;
 Startup* startup;
 Menu* menu;
 Graph* graph;
@@ -22,7 +23,11 @@ void SetLayoutB();
 
 int main()
 {
-	app = new App("Math Project", 1024, 720, false);
+	app = new App("Geo::Math", 1024, 720, false);
+	App::version = "0.1.0";
+	App::date = "2018";
+	user = new User();
+
 	startup = new Startup();
 	menu = new Menu();
 	graph = new Graph();
@@ -30,7 +35,6 @@ int main()
 	points = new Points();
 	data = new Data();
 
-	App::version = "0.0.9";
 	App::isRunning = true;
 	menu->context_app = app;
 
@@ -60,6 +64,7 @@ int main()
 	delete graph;
 	delete menu;
 	delete startup;
+	delete user;
 	delete app;
 }
 

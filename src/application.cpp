@@ -3,6 +3,7 @@
 
 const char* App::window_title;
 const char* App::version;
+const char* App::date;
 ImGuiWindowFlags App::flags = ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse;
 bool App::isRunning = false;
 bool App::isFullscreen = false;
