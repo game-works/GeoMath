@@ -24,7 +24,7 @@ void SetLayoutB();
 int main()
 {
 	app = new App("Geo::Math", 1024, 720, false);
-	App::version = "0.1.0";
+	App::version = "0.1.1";
 	App::date = "2018";
 	user = new User();
 
@@ -42,10 +42,6 @@ int main()
 	{
 		app->Process();
 		app->Update();
-#if _DEBUG
-		ImGui::ShowDemoWindow();
-#endif
-
 		startup->Update();
 		menu->Update();
 
