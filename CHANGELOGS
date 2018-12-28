@@ -1,3 +1,11 @@
+VERSION 0.1.3
+* Refactored Makefile
+* Added Statically-Linked Builds
+
+VERSION 0.1.2
+* Better version handler (Makefile pass to as preprocessor macro)
+* Update Makefile - Handles Window Packaging
+
 VERSION 0.1.1
 * Added assert message when user remove the "assets" folder that comes along the .zip
 

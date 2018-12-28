@@ -18,13 +18,20 @@ Graph* graph;
 Points* points;
 Data* data;
 
+#define STR_EXPAND(x) #x
+#define STR(x) STR_EXPAND(x)
+#ifndef VERSION
+#define VERSION "0.1.0"
+#endif
+
 void SetLayoutA();
 void SetLayoutB();
 
 int main()
 {
+	std::cout << "Version: " << STR(VERSION) << std::endl;
 	app = new App("Geo::Math", 1024, 720, false);
-	App::version = "0.1.1";
+	App::version = STR(VERSION);
 	App::date = "2018";
 	user = new User();
 

@@ -11,6 +11,9 @@ A project software for helping students on Analytical Geometry and other educati
 * Dear ImGUI (1.66b)
 * ImGUI-SFML
 
+## LICENSE
+MIT LICENSE
+
 ## Screenshots
 Running on Windows
 ![On Windows 1](https://github.com/flamendless/MathProject/blob/master/assets/screenshots/windows3.png)

@@ -9,7 +9,7 @@ sf::Texture User::tex_logo;
 User::User()
 {
 	int n = tex_logo.loadFromFile("assets/textures/title.png");
-	std::cout << n << std::endl;
+	std::cout << std::boolalpha << "Texture Load: " << n << std::endl;
 	assert(n == 1 && "Assets are missing. Please redownload and DO NOT remove the assets folder");
 }
 

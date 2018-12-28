@@ -1,12 +1,17 @@
 PROJECT_NAME := GeoMath
-BIN_DIR := bin
-OBJ_DIR := bin-obj
+VERSION := 0.1.3
+TYPE := Dynamic
+PLATFORM := Linux#Windows
+ARCHITECTURE := x86# x86_64
+CONFIG := Debug#Release
+CXXFLAGS := ${CXXFLAGS} -std=c++11 -Wall -W -pedantic
+CXXFLAGS += -D_$(shell echo ${CONFIG} | tr a-z A-Z) -DVERSION=${VERSION}
 SRC_DIR := src
 INCLUDE_DIR := include
 
-PLATFORM := Linux
-ARCHITECTURE := x86 #32-bit, 64-bit = x86_64
-CONFIG := Debug
+OBJ_DIR := bin
+NAME := ${OBJ_DIR}/${PLATFORM}-${TYPE}
+BUILD_DIR := build/${PLATFORM}-${TYPE}
 
 LIB_IMGUI := ${INCLUDE_DIR}/imgui
 LIB_IMGUI_SFML := ${INCLUDE_DIR}/imgui-sfml
@@ -14,54 +19,53 @@ LIB_IMGUI_SFML := ${INCLUDE_DIR}/imgui-sfml
 SOURCES := $(wildcard ${SRC_DIR}/*.cpp)
 SOURCES += $(wildcard ${LIB_IMGUI}/*.cpp)
 SOURCES += $(wildcard ${LIB_IMGUI_SFML}/*.cpp)
-
 SOURCES := $(filter-out ${LIB_IMGUI}/imgui_demo.cpp, ${SOURCES})
 
-OBJECTS := $(patsubst $(SRC_DIR)/%.cpp, $(OBJ_DIR)/$(PLATFORM)/%.o, $(SOURCES))
-
+OBJECTS := $(patsubst $(SRC_DIR)/%.cpp, $(OBJ_DIR)/%.o, $(SOURCES))
 INCLUDES := -I${LIB_IMGUI} -I${LIB_IMGUI_SFML}
-LINKS := -lGL -lsfml-graphics -lsfml-window -lsfml-system
 
-CC ?= clang
-CXX ?= clang++
-CXXFLAGS := ${CXXFLAGS} -pedantic -D _$(shell echo ${CONFIG} | tr a-z A-Z)
+ifeq ($(TYPE), Static)
+  CXXFLAGS += -DSFML_STATIC
+  LDDFLAGS := -Linclude/SFML/lib-clang
+  LDDFLAGS += -lsfml-graphics-s -lsfml-window-s -lsfml-system-s
+  LDDFLAGS += -lX11 -lXrandr -lpthread -lopenal -ludev -lfreetype -lGL -lvorbisenc -lvorbisfile -lvorbis -logg -lFLAC
+else
+  LDDFLAGS := -lsfml-graphics -lsfml-window -lsfml-system
+  LDDFLAGS += -lGL
+endif
 
 ifeq ($(PLATFORM), Windows)
-INCLUDES += -Iinclude/SFML/include
-LINKS := -Linclude/SFML/lib
-LINKS += -lopengl32 -lsfml-graphics -lsfml-window -lsfml-system
-
-ifeq ($(ARCHITECTURE), x86_64)
-CC = x86_64-w64-mingw32-gcc
-CXX = x86_64-w64-mingw32-g++
+  ifeq ($(ARCHITECTURE), x86_64)
+    CC = x86_64-w64-mingw32-gcc
+    CXX = x86_64-w64-mingw32-g++
+  else
+    CC = i686-w64-mingw32-gcc
+    CXX = i686-w64-mingw32-g++
+  endif
+  INCLUDES += -Iinclude/SFML/include
+  LINKS := -Linclude/SFML/lib
+  LDDFLAGS += -lopengl32
+  LINKS += ${LDDFLAGS}
 else
-CC = i686-w64-mingw32-gcc
-CXX = i686-w64-mingw32-g++
+  CC ?= clang
+  CXX ?= clang++
+  LINKS := ${LDDFLAGS}
 endif
 
-CXXFLAGS := ${CXXFLAGS} -Wall
-endif
-
-EXECUTABLE := ${PROJECT_NAME}-${CONFIG}-${ARCHITECTURE}
+EXECUTABLE := ${PROJECT_NAME}-${CONFIG}-${TYPE}-${ARCHITECTURE}
 
 ${EXECUTABLE}: ${OBJECTS}
-	${CXX} ${LDFLAGS} ${CXXFLAGS} -o ${BIN_DIR}/${PLATFORM}/$@ $^ ${INCLUDES} ${LINKS}
+	${CXX} ${CXXFLAGS} -o ${BUILD_DIR}/$@ $^ ${INCLUDES} ${LINKS}
 
-$(OBJ_DIR)/$(PLATFORM)/%.o: $(SRC_DIR)/%.cpp
-	${CXX} $(CXXFLAGS) -c -o $@ $< ${INCLUDES}
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
+	${CXX} ${CXXFLAGS} -c -o $@ $< ${INCLUDES}
 
 test:
-	./${BIN_DIR}/${PLATFORM}/${EXECUTABLE}
+	./${BUILD_DIR}/${EXECUTABLE}
 
 compile:
-	${CXX} ${CXXFLAGS} -o ${BIN_DIR}/${PLATFORM}/${EXECUTABLE} ${SOURCES} ${INCLUDES} ${LINKS}
+	${CXX} ${CXXFLAGS} -o ${BUILD_DIR}/${EXECUTABLE} ${SOURCES} ${INCLUDES} ${LINKS}
 
-clean:
-	rm -rf ${BIN_DIR}
-	rm -rf ${OBJ_DIR}
-	mkdir ${OBJ_DIR}
-	mkdir ${OBJ_DIR}/Linux
-	mkdir ${OBJ_DIR}/Windows
-	mkdir ${BIN_DIR}
-	mkdir ${BIN_DIR}/Linux
-	mkdir ${BIN_DIR}/Windows
+package-windows:
+	make CONFIG=Release PLATFORM=Windows
+	cd ${BUILD_DIR}/ && zip -9r GeoMath-${PLATFORM}-${TYPE}-${CONFIG}.zip .
