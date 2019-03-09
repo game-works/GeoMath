@@ -11,6 +11,9 @@ A project software for helping students on Analytical Geometry and other educati
 * Dear ImGUI (1.66b)
 * ImGUI-SFML
 
+## CHANGELOGS
+See [here](CHANGELOGS)
+
 ## LICENSE
 MIT LICENSE
 
